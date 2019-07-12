@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Sócio</title>
+</head>
+<body>
+<div>
+    <form method="post">
+        {%csrf_token%}
+        {{form.as_p}}
+        <input value="Adicionar" type="submit">
+    </form>
+</div>
+</body>
+</html>

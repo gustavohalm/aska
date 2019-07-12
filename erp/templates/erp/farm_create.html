@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crie uma Fazenda</title>
+</head>
+<body>
+    <div>
+        <center>
+            <form method="post">
+                {%csrf_token%}
+                {{form.as_p}}
+                <input value="Criar Fazenda" type="submit" >
+            </form>
+        </center>
+    </div>
+</body>
+</html>

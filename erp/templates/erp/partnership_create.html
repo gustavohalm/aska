@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicione os Sócios da Fazenda</title>
+</head>
+<body>
+<center>
+    <div>
+        <h1>Adicione o(s) Sócio(s) da Fazenda</h1>
+        <div class="farm-detail">
+            <ul class="list-farm-detail">
+                <li class="item-list-farm"> <h5>Fazenda: {{farm.name}} </h5> </li>
+                <li class="item-list-farm"> <h6>Inscrição Estadual: {{farm.insc_state}}</h6> </li>
+                <li class="item-list-farm">
+                    <h5>Sócio(s)</h5>
+
+                    <table>
+                        <th><a>Sócio </a></th>
+                        <th><a>Porcentagem </a></th>
+                        {%for partnership in farm.get_partnership%}
+                            <tr>
+                                <th><a> {{partnership.partner.name}} </a> </th>
+                                <th><a> {{partnership.percent}} </a> </th>
+                            </tr>
+                        {%empty%}
+                            <tr>
+                                <th>  <span style="color:#a5a5a5;">Nome </span></th>
+                                <th><span style="color:#a5a5a5;"> 0.00%</span> </th>
+                            </tr>
+                        {%endfor%}
+                    </table>
+                    <form method="post" action="">
+                        {%csrf_token%}
+                        {{form}}
+                        {%if form%}
+                            <input value="Adicionar" type="submit" >
+                        {%endif%}
+                    </form>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</center>
+
+</body>
+</html>

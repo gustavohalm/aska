@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lançamentos Financeiros</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<style>
+    .forms{
+        max-width: 256px;
+
+    }
+
+</style>
+
+</head>
+<body>
+    <div>
+        <center>
+            <h4>Lançamentos Financeiros</h4>
+              <div >
+                  <form method="post" class="form" style="padding:10px;">
+                    {%csrf_token%}
+                    {{form.as_p}}
+                    <input value="Adicionar" type="submit" class="btn btn-primary">
+                 </form>
+              </div>
+
+            <table class="table">
+                <tr>
+                    <th>
+                        <h4> Fazenda</h4>
+                    </th>
+
+                    <th>
+                        <h4> Banco</h4>
+                    </th>
+
+                    <th>
+                        <h4> Descrição</h4>
+                    </th>
+
+                    <th>
+                        <h4> Categoria</h4>
+                    </th>
+                    <th>
+                        <h4> Fornecedor/Cliente</h4>
+                    </th>
+
+
+                    <th>
+                        <h4> Valor</h4>
+                    </th>
+
+                    <th>
+                        <h4> Data</h4>
+
+                    </th>
+
+                    <th>
+                        <h4> Ação</h4>
+                    </th>
+                </tr>
+                {%for bill in bills%}
+                    <tr>
+                        <th> {{bill.farm}} </th>
+                        <th> {{bill.bank_account}} </th>
+                        <th> {{bill.description}} </th>
+                        <th> {{bill.account}} </th>
+                        <th> {{bill.provider}} </th>
+
+                        {%if bill.type == 'Pagar' %}
+                            <th> -R${{bill.value}} </th>
+                        {%else%}
+                            <th> R${{bill.value}} </th>
+                        {%endif%}
+
+                        <th> {{bill.date}} </th>
+                        <th> <a>  <span style="color:#df2a2a; "> X </span> </a> | <a> <span style="color: #379f8c;"> Editar</span> </a> </th>
+                    </tr>
+                {%empty%}
+                <tr>
+                    <center> <th><h5>Sem Lançamentos</h5> </th></center>'
+                </tr>
+                {%endfor%}
+                        <th> Total </th>
+                        <th>  </th>
+                        <th>  </th>
+                        <th>  </th>
+                        <th>  </th>
+
+                        <th> R${{value_total}}  </th>
+
+                        <th>  </th>
+                        <th>  </th>
+
+            </table>
+
+        </center>
+    </div>
+</body>
+</html>
