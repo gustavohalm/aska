@@ -105,7 +105,7 @@
                         {%endif%}
 
                         <th> <span style="color:#555E5E;">{{bill.date}}</span> </th>
-                        <th style="color:#555E5E;"> <a href="#">  <span style="color:#df2a2a; "> X </span> </a> | <a href="{% url 'bill_update' pk=bill.id %}"> <span style="color: #379f8c;"> Editar</span> </a> </th>
+                        <th style="color:#555E5E;"> <a href="#">  <span style="color:#df2a2a; "> X </span> </a> | <a href="{% url 'bill_update'  pk=bill.id%}"> <span style="color: #379f8c;"> Editar</span> </a> </th>
                     </tr>
                 {%empty%}
                 <tr>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, UpdateView
 from . import models, forms
 
@@ -89,23 +89,9 @@ def billCreateView(request):
 
 class BillUpdateView(UpdateView):
     model = models.Bill
-    success_url = '..'
+    success_url = '../..'
     form_class = forms.BillForm
     template_name = 'erp/bill_update.html'
 
-def billUpdateView(request):
 
-    if 'bill' in request.GET:
-        bill_id = request.GET['bill']
-        bill = models.object.get(bill_id)
-        form = forms.BillForm()
-        form.farm = bill.farm
-
-        bills = models.Bill.objects.filter(user=request.user)
-        context = {
-            'bills': bills,
-            'form': form
-        }
-
-        return render(request, 'erp/bill_update.html', context)
 
