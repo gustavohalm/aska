@@ -1,48 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Adicione os Sócios da Fazenda</title>
-</head>
-<body>
-<center>
+{% extends 'base.html' %}
+{%block title%}Fazenda - Sociedade{%endblock%}
+{% block content %}
     <div>
-        <h1>Adicione o(s) Sócio(s) da Fazenda</h1>
-        <div class="farm-detail">
-            <ul class="list-farm-detail">
-                <li class="item-list-farm"> <h5>Fazenda: {{farm.name}} </h5> </li>
-                <li class="item-list-farm"> <h6>Inscrição Estadual: {{farm.insc_state}}</h6> </li>
-                <li class="item-list-farm">
-                    <h5>Sócio(s)</h5>
+        <center>
+        <h3>Adicione o(s) Sócio(s) da Fazenda</h3>
+            <br>
+            <br>
+            <div class="farm-detail">
+                <ul class="list-farm-detail">
+                    <li class="item-list-farm"> <h3 > Fazenda:   <span style="color:#2F4F4F;"> {{farm.name}}</span> </h3> </li>
+                    <li class="item-list-farm"> <h4>Inscrição Estadual:<span style="color:#2F4F4F;"> {{farm.insc_state}} </span></h4> </li>
+                    <li class="item-list-farm">
+                    <br>
+                        <h5>Sócio(s)</h5>
 
-                    <table>
-                        <th><a>Sócio </a></th>
-                        <th><a>Porcentagem </a></th>
-                        {%for partnership in farm.get_partnership%}
+                        <table class="table  table-bordered" style="margin: 2px; max-width: 600px;">
+                            <th><a style="color:#333333" >Sócio </a></th>
+                            <th><a style="color:#333333">Porcentagem </></th>
+                            {%for partnership in farm.get_partnership%}
                             <tr>
-                                <th><a> {{partnership.partner.name}} </a> </th>
-                                <th><a> {{partnership.percent}} </a> </th>
+                                <th><a style="color:#585858" > {{partnership.partner.name}} </a> </th>
+                                <th><a style="color:#585858" > {{partnership.percent}} </a> </th>
                             </tr>
-                        {%empty%}
+                            {%empty%}
                             <tr>
                                 <th>  <span style="color:#a5a5a5;">Nome </span></th>
                                 <th><span style="color:#a5a5a5;"> 0.00%</span> </th>
                             </tr>
-                        {%endfor%}
-                    </table>
-                    <form method="post" action="">
-                        {%csrf_token%}
-                        {{form}}
-                        {%if form%}
-                            <input value="Adicionar" type="submit" >
-                        {%endif%}
-                    </form>
+                            {%endfor%}
+                        </table>
+                        <br><br>
+                        <form method="post" action="" class="form">
+                            {%csrf_token%}
+                            {{form}}
+                            {%if form%}<br>
+                            <input value="Adicionar" type="submit" class="btn btn-primary btn-erp" >
+                            {%endif%}
+                        </form>
 
-                </li>
-            </ul>
-        </div>
+                    </li>
+                </ul>
+
+            </div>
+
+            </center>
     </div>
-</center>
-
-</body>
-</html>
+{% endblock %}

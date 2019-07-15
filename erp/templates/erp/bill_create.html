@@ -1,36 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Lançamentos Financeiros</title>
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<style>
-    .forms{
-        max-width: 256px;
-
-    }
-
-</style>
-
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
     <div>
-        <center>
-            <h4>Lançamentos Financeiros</h4>
-              <div >
-                  <form method="post" class="form" style="padding:10px;">
+            <div class="container">
+                <div class="row text-center">
+                    <h4>Lançamentos Financeiros</h4>
+
+                </div>
+
+            </div>
+                <div >
+                  <form method="post" class="" style="padding:10px;">
                     {%csrf_token%}
-                    {{form.as_p}}
-                    <input value="Adicionar" type="submit" class="btn btn-primary">
+                      <!--
+                        {{form.as_p}}
+                        <input value="Adicionar" type="submit" class="btn btn-primary">
+                      -->
+                      <div class="container" style="width:99%;">
+                          <div class="row">
+                              <div class="col-md-4 col-lg-4">
+                                  <label for="id_farm">Fazenda:</label><br>
+                                  {{form.farm}}<br>
+                                  <label for="id_value">Valor:</label><br>
+                                  {{form.value}}<br>
+                                  <label for="id_type">Tipo:</label><br>
+                                  {{form.type}}<br>
+                              </div>
+
+
+                              <div class="col-md-4 col-lg-4">
+                                  <label for="id_bak_account">Conta Bancária:</label><br>
+                                  {{form.bank_account}}<br>
+                                  <label for="id_account">Categoria:</label><br>
+                                  {{form.account}}<br>
+                                  <label for="id_provider">Fornecedor/Cliente:</label><br>
+                                  {{form.provider}}<br>
+
+                              </div>
+
+
+                              <div class="col-md-4 col-lg-4">
+                                  <label for="id_description">Descrição:</label><br>
+                                  {{form.description}}<br>
+                                  <label for="id_date">Data:</label><br>
+                                  {{form.date}}<br>
+                                  <br>
+                                  <input value="Adicionar" type="submit" class="btn btn-primary btn-erp">
+
+                              </div>
+                          </div>
+                    </div>
+
+
                  </form>
               </div>
+        <center>
 
             <table class="table">
                 <tr>
@@ -69,20 +92,20 @@
                 </tr>
                 {%for bill in bills%}
                     <tr>
-                        <th> {{bill.farm}} </th>
-                        <th> {{bill.bank_account}} </th>
-                        <th> {{bill.description}} </th>
-                        <th> {{bill.account}} </th>
-                        <th> {{bill.provider}} </th>
+                        <th> <span style="color:#555E5E;">{{bill.farm}} </span></th>
+                        <th> <span style="color:#555E5E;">{{bill.bank_account}} </span></th>
+                        <th> <span style="color:#555E5E;">{{bill.description}} </span></th>
+                        <th> <span style="color:#555E5E;">{{bill.account}} </span></th>
+                        <th> <span style="color:#555E5E;">{{bill.provider}} </span></th>
 
                         {%if bill.type == 'Pagar' %}
-                            <th> -R${{bill.value}} </th>
+                            <th>  <span style="color:#555E5E;">-R${{bill.value}}</span> </th>
                         {%else%}
-                            <th> R${{bill.value}} </th>
+                            <th> <span style="color:#555E5E;">R${{bill.value}}</span> </th>
                         {%endif%}
 
-                        <th> {{bill.date}} </th>
-                        <th> <a>  <span style="color:#df2a2a; "> X </span> </a> | <a> <span style="color: #379f8c;"> Editar</span> </a> </th>
+                        <th> <span style="color:#555E5E;">{{bill.date}}</span> </th>
+                        <th style="color:#555E5E;"> <a href="#">  <span style="color:#df2a2a; "> X </span> </a> | <a href="#"> <span style="color: #379f8c;"> Editar</span> </a> </th>
                     </tr>
                 {%empty%}
                 <tr>
@@ -104,5 +127,5 @@
 
         </center>
     </div>
-</body>
-</html>
+
+{% endblock  %}

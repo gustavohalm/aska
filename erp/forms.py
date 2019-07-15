@@ -13,6 +13,12 @@ class PartnerForm(forms.ModelForm):
             'born': 'Data de Nascimento',
         }
 
+        widgets = {
+            'name': forms.TextInput(attrs= { 'class':'form-control forms' } ),
+            'cpf' :   forms.NumberInput( attrs= { 'class':'form-control forms'}),
+            'rg':   forms.NumberInput( attrs= { 'class':'form-control forms'}),
+            'born': forms.DateInput( attrs= { 'class':'form-control forms '})
+        }
 
 class FarmForm(forms.ModelForm):
     class Meta:
@@ -21,6 +27,10 @@ class FarmForm(forms.ModelForm):
         labels = {
             'name': 'Nome da Fazenda',
             'insc_state': 'Inscrição Estadual'
+        }
+        widgets= {
+            'name': forms.TextInput(attrs= { 'class':'form-control forms' } ),
+            'insc_state':  forms.NumberInput( attrs= { 'class':'form-control forms'})
         }
 
 
@@ -33,6 +43,10 @@ class PartnershipForm(forms.ModelForm):
             'percent': 'Porcentagem',
         }
 
+        widgets = {
+                'partner': forms.Select(attrs= { 'class':'form-control forms' } ),
+            'percent':  forms.NumberInput( attrs= { 'class':'form-control forms'})
+        }
 
 class BillForm(forms.ModelForm):
     class Meta:
@@ -41,7 +55,8 @@ class BillForm(forms.ModelForm):
         labels = {
             'farm':'Fazenda',
             'type': 'Tipo',
-            'bank_account:': 'Conta Bancaria',
+            'bank_account': 'Conta Bancaria',
+            'value': 'Valor',
             'account': 'Categoria',
             'provider': 'Fornecedor/Comprador',
             'description': 'Descrição',
@@ -51,7 +66,8 @@ class BillForm(forms.ModelForm):
 
             'farm': forms.Select(attrs= { 'class':'form-control forms'} ),
             'type': forms.Select(attrs= { 'class':'form-control forms'} ),
-            'bank_account:': forms.Select(attrs= { 'class':'form-control forms'} ),
+            'value': forms.NumberInput( attrs= { 'class':'form-control forms'}),
+            'bank_account': forms.Select(attrs= { 'class':'form-control forms'} ),
             'account': forms.Select(attrs= { 'class':'form-control forms'} ),
             'provider': forms.Select(attrs= { 'class':'form-control forms'} ),
             'description': forms.TextInput(attrs= { 'class':'form-control forms' } ),

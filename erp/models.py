@@ -30,7 +30,7 @@ class Partnership(models.Model):
     farm = models.ForeignKey(Farm, on_delete=models.CASCADE, related_name='partners')
 
     def __str__(self):
-        return self.partner.name + '( ' + str(self.percent) + ' )'
+        return self.partner.name + ' ( ' + str(self.percent) + ' )'
 
 
 class BankAccount(models.Model):
@@ -41,7 +41,7 @@ class BankAccount(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.PROTECT)
 
     def __str__(self):
-        return self.name + '(' + self.account_number + ')'
+        return self.name + ' (' + self.account_number + ')'
 
 class Account(models.Model):
     name = models.CharField(max_length=512)
@@ -58,7 +58,7 @@ class Provider(models.Model):
 
 
     def __str__(self):
-        return self.name + '(CNPJ '+ self.cnpj +')'
+        return self.name + ' (CNPJ '+ self.cnpj +')'
 
 class Bill(models.Model):
     farm = models.ForeignKey(Farm, on_delete=models.CASCADE)

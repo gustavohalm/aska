@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Crie uma Fazenda</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{%block title%}Fazenda - Cadastro{%endblock%}
+
+{% block content %}
+
     <div>
         <center>
-            <form method="post">
+            <form method="post" class="form">
                 {%csrf_token%}
                 {{form.as_p}}
-                <input value="Criar Fazenda" type="submit" >
+                <input value="Criar Fazenda" type="submit"  class="btn btn-primary btn-erp">
             </form>
         </center>
     </div>
-</body>
-</html>
+
+{% endblock %}

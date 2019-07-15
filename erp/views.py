@@ -62,14 +62,6 @@ def partnershipCreateView(request, pk):
 
 
 def billCreateView(request):
-    bills = models.Bill.objects.filter(user=request.user)
-    total = 0.00
-    for bill in bills:
-        if bill.type == 'Pagar':
-            total -= float( bill.value )
-        else:
-            total += float(  bill.value )
-
     if request.method == 'POST':
 
         form = forms.BillForm(request.POST)
@@ -77,6 +69,15 @@ def billCreateView(request):
             bill = form.save(commit=False)
             bill.user = request.user
             bill.save()
+
+    bills = models.Bill.objects.filter(user=request.user)
+    total = 0.00
+    for bill in bills:
+        if bill.type == 'Pagar':
+            total -= float(bill.value)
+        else:
+            total += float(bill.value)
+
 
     form = forms.BillForm
     context = {
