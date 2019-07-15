@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from . import models, forms
 
 
@@ -31,8 +31,6 @@ class FarmCreateView(CreateView):
             return redirect('partnership_create', pk=farm.id)
 
 
-class PartnershipCreateView(CreateView):
-    pass
 
 def partnershipCreateView(request, pk):
     farm = models.Farm.objects.get(id=pk)
@@ -88,4 +86,26 @@ def billCreateView(request):
 
     return render(request, 'erp/bill_create.html', context=context)
 
+
+class BillUpdateView(UpdateView):
+    model = models.Bill
+    success_url = '..'
+    form_class = forms.BillForm
+    template_name = 'erp/bill_update.html'
+
+def billUpdateView(request):
+
+    if 'bill' in request.GET:
+        bill_id = request.GET['bill']
+        bill = models.object.get(bill_id)
+        form = forms.BillForm()
+        form.farm = bill.farm
+
+        bills = models.Bill.objects.filter(user=request.user)
+        context = {
+            'bills': bills,
+            'form': form
+        }
+
+        return render(request, 'erp/bill_update.html', context)
 
