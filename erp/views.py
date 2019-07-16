@@ -94,4 +94,13 @@ class BillUpdateView(UpdateView):
     template_name = 'erp/bill_update.html'
 
 
+def importExcelBillView(request):
+    pass
 
+
+def importXmlBillView(request):
+    pass
+
+
+def relatorioBillsView8(request):
+    pass

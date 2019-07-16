@@ -58,7 +58,7 @@ class Provider(models.Model):
 
 
     def __str__(self):
-        return self.name + ' (CNPJ '+ self.cnpj +')'
+        return self.name + '( CNPJ '+ self.cnpj +')'
 
 class Bill(models.Model):
     farm = models.ForeignKey(Farm, on_delete=models.CASCADE)
