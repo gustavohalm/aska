@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{%block title%} Relatorios {%endblock%}
+
+
+{%block content%}
+
+<div class="container">
+    <div class="row">
+        <center>
+            <h4>Tela de Login</h4><br>
+            <form class="form" method="post">
+                {%csrf_token%}
+                <label for="id_username">Uusário:</label>
+                <input type="text" name="username" id="id_username" required class="form-control forms">
+                <label for="id_password">Senha:</label>
+                <input type="password" name="password" id="id_password" required class="form-control forms">
+                <input class="btn btn-info" value="Logar" type="submit">
+            </form>
+        </center>
+    </div>
+</div>
+
+
+{% endblock %}

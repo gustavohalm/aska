@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{%block title%} Relatorios {%endblock%}
+
+
+{%block content%}
+
+<br>
+<br>
+<br>
+
+
+<form method="get"  class="form">
+    <div class="container">
+        <div class="row">
+
+            <h4> Selecione os paramentros a serem bsucados </h4>
+        </div><br>
+        <div class="row text-center">
+
+            <div class="col-md-3">
+                {{form.farm.label}}
+                {{form.farm}}
+            </div>
+
+            <div class="col-md-3">
+                <label for="id_month">Mês</label>
+                <input name="month" class="form-control forms" id="id_month">
+            </div>
+
+
+            <div class="col-md-3">
+                <label for="id_year">Ano</label>
+                <input name="year" class="form-control forms" id="id_year">
+            </div>
+
+            <div class="col-md-3">
+                <br>
+                <input  type="submit"  value="Gerar" class="btn btn-success btn-erp" >
+            </div>
+        </div>
+    </div>
+</form>
+{% if bills %}
+    <table class="table">
+        <tr>
+           <th>
+                <h4> Fazenda</h4>
+            </th>
+
+            <th>
+                <h4> Banco</h4>
+            </th>
+
+            <th>
+                <h4> Descrição</h4>
+            </th>
+
+            <th>
+                <h4> Categoria</h4>
+            </th>
+            <th>
+                <h4> Fornecedor/Cliente</h4>
+            </th>
+            <th>
+                <h4> Valor</h4>
+            </th>
+
+            <th>
+                <h4> Data</h4>
+
+            </th>
+        </tr>
+        {% for bill in bills%}
+            <tr>
+                <th> {{bill.farm}} </th>
+                <th> {{bill.bank_account}} </th>
+                <th> {{bill.description}} </th>
+                <th> {{bill.account}} </th>
+                <th> {{bill.provider}}</th>
+                <th> {{bill.value}} </th>
+                <th> {{bill.date}} </th>
+
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endif %}
+
+{% endblock %}

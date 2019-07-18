@@ -1,6 +1,20 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, UpdateView
 from . import models, forms
+from django.contrib.auth import authenticate, login
+
+
+def loginView(request):
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('../lancamentos/')
+
+    return render(request, 'erp/login.html')
 
 
 class PartnerCreateView(CreateView):
@@ -78,6 +92,11 @@ def billCreateView(request):
 
 
     form = forms.BillForm
+    form.farm = models.Farm.objects.filter(user=request.user)
+    form.bank_account = models.Farm.objects.filter(user=request.user)
+    form.account = models.Farm.objects.filter(user=request.user)
+    form.provider = models.Farm.objects.filter(user=request.user)
+
     context = {
         'bills': bills,
         'form': form,
@@ -102,5 +121,33 @@ def importXmlBillView(request):
     pass
 
 
-def relatorioBillsView8(request):
-    pass
+def reportBillsView(request):
+
+    if 'farm' in request.GET:
+        farm = request.GET['farm']
+        if 'year' in request.GET:
+            year = request.GET['year']
+            if 'month' in request.GET:
+                month = request.GET['month']
+                bills = models.Bill.objects.filter(farm=farm).filter(date__year=year).filter(date__month=month)
+            else:
+                bills = models.Bill.objects.filter(farm=farm).filter(date__year=year)
+        else:
+            bills = models.Bill.objects.filter(farm=farm)
+    elif 'year' in request.GET:
+        year = request.GET['year']
+        if 'month' in request.GET:
+            month = request.GET['month']
+            bills = models.Bill.objects.filter(date__year=year).filter(date__month=month)
+        else:
+            bills = models.Bill.objects.filter(date__year=year)
+    else:
+        bills = []
+
+    form = forms.BillForm
+    context = {
+        'form': form,
+        'bills' : bills
+        }
+
+    return render( request, 'erp/report_bills.html', context)

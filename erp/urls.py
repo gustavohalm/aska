@@ -12,5 +12,7 @@ urlpatterns =[
     path('cadastro/fazendas/<int:pk>/sociedade/', views.partnershipCreateView, name='partnership_create'),
     path('lancamentos/', views.billCreateView, name='bill_create'),
     path('lancamentos/edit/<int:pk>/', views.BillUpdateView.as_view(), name='bill_update'),
+    path('lancamentos/relatorio/', views.reportBillsView, name='bills_report'),
+    path('login/', views.loginView, name='login_view'),
     path('api/v0/', include(router.urls))
 ]

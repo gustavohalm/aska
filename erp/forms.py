@@ -2,6 +2,8 @@ from django import forms
 from . import models
 
 
+
+
 class PartnerForm(forms.ModelForm):
     class Meta:
         model = models.Partner
@@ -19,6 +21,7 @@ class PartnerForm(forms.ModelForm):
             'rg':   forms.NumberInput( attrs= { 'class':'form-control forms'}),
             'born': forms.DateInput( attrs= { 'class':'form-control forms '})
         }
+
 
 class FarmForm(forms.ModelForm):
     class Meta:
