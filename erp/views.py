@@ -16,6 +16,8 @@ def loginView(request):
 
     return render(request, 'erp/login.html')
 
+def logoutView(request):
+    pass
 
 class PartnerCreateView(CreateView):
     model = models.Partner
