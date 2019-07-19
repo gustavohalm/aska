@@ -3,8 +3,11 @@ from . import views
 from rest_framework import routers
 from erp.api import viewsets
 
-router  = routers.DefaultRouter()
+router = routers.DefaultRouter()
 router.register('bills', viewsets.BillsViewset, base_name='bills_endpoint')
+router.register('partner', viewsets.PartnerViewset, base_name='partner_endpoint')
+router.register('partnership', viewsets.PartnershipViewset, base_name='partnership_endpoint')
+router.register('farm', viewsets.FarmViewset, base_name='farm_endpoint')
 
 urlpatterns =[
     path('cadastro/socios/', views.PartnerCreateView.as_view(), name='partner_create'),

@@ -38,6 +38,7 @@ class PartnershipViewset(viewsets.ModelViewSet):
 
 
 class BillsViewset(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated, )
     serializer_class = serializers.BillSerializer
 
     def get_queryset(self):
