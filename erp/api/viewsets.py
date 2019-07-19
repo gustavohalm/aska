@@ -1,6 +1,41 @@
 from rest_framework import viewsets
-from . import  serializers
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from . import serializers
 from erp import models
+
+
+class PartnerViewset(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = serializers.PartnerSerializer
+
+    def get_queryset(self):
+        return models.Partner.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class FarmViewset(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = serializers.FarmSerialiazer
+
+    def get_queryset(self):
+        return models.Farm.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class PartnershipViewset(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = serializers.PartnershipSerialiazer
+
+    def get_queryset(self):
+        return models.Partnership.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 class BillsViewset(viewsets.ModelViewSet):
     serializer_class = serializers.BillSerializer

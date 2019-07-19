@@ -17,7 +17,7 @@
                       -->
                       <div class="container form-bills" style="width:99%;">
                           <div class="row">
-                              <div class="col-md-4 col-lg-4">
+                              <div class="col-md-3 col-lg-3">
                                   <label for="id_farm">Fazenda:</label><br>
                                   {{form.farm}}<br>
                                   <label for="id_value">Valor:</label><br>
@@ -27,7 +27,7 @@
                               </div>
 
 
-                              <div class="col-md-4 col-lg-4">
+                              <div class="col-md-3 col-lg-3">
                                   <label for="id_bank_account">Conta Bancária:</label><br>
                                   {{form.bank_account}}<br>
                                   <label for="id_account">Categoria:</label><br>
@@ -36,9 +36,14 @@
                                   {{form.provider}}<br>
 
                               </div>
+                              <div class="col-md-3 col-lg-3">
+                                  <label>Tipo de Documento:</label><br>
+                                  {{form.document_type}}<br>
+                                  <label>Número do Documento:</label><br>
+                                  {{form.document_number}}<br>
+                              </div>
 
-
-                              <div class="col-md-4 col-lg-4">
+                              <div class="col-md-3 col-lg-3">
                                   <label for="id_description">Descrição:</label><br>
                                   {{form.description}}<br>
                                   <label for="id_date">Data:</label><br>

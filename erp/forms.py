@@ -2,8 +2,6 @@ from django import forms
 from . import models
 
 
-
-
 class PartnerForm(forms.ModelForm):
     class Meta:
         model = models.Partner
@@ -51,6 +49,7 @@ class PartnershipForm(forms.ModelForm):
             'percent':  forms.NumberInput( attrs= { 'class':'form-control forms'})
         }
 
+
 class BillForm(forms.ModelForm):
     class Meta:
         model = models.Bill
@@ -63,10 +62,11 @@ class BillForm(forms.ModelForm):
             'account': 'Categoria',
             'provider': 'Fornecedor/Comprador',
             'description': 'Descrição',
-            'date': 'Data'
+            'date': 'Data',
+            'document_type': 'Tipo do documento',
+            'document_number': 'Número do documento',
         }
-        widgets ={
-
+        widgets = {
             'farm': forms.Select(attrs= { 'class':'form-control forms'} ),
             'type': forms.Select(attrs= { 'class':'form-control forms'} ),
             'value': forms.NumberInput( attrs= { 'class':'form-control forms'}),
@@ -74,5 +74,8 @@ class BillForm(forms.ModelForm):
             'account': forms.Select(attrs= { 'class':'form-control forms'} ),
             'provider': forms.Select(attrs= { 'class':'form-control forms'} ),
             'description': forms.TextInput(attrs= { 'class':'form-control forms' } ),
-            'date': forms.DateInput( attrs= { 'class':'form-control forms '})
+            'date': forms.DateInput( attrs= { 'class':'form-control forms '}),
+            'document_type': forms.Select(attrs={'class': 'form-control forms'}),
+            'document_number': forms.NumberInput(attrs={'class': 'form-control forms'}),
         }
+
