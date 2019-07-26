@@ -9,7 +9,7 @@ router.register('partner', viewsets.PartnerViewset, base_name='partner_endpoint'
 router.register('partnership', viewsets.PartnershipViewset, base_name='partnership_endpoint')
 router.register('farm', viewsets.FarmViewset, base_name='farm_endpoint')
 
-urlpatterns =[
+urlpatterns = [
     path('cadastro/socios/', views.PartnerCreateView.as_view(), name='partner_create'),
     path('cadastro/fazendas/', views.FarmCreateView.as_view(), name='farm_create'),
     path('cadastro/fazendas/<int:pk>/sociedade/', views.partnershipCreateView, name='partnership_create'),
