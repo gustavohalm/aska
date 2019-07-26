@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{%block title%}Fazenda - Cadastro{%endblock%}
+{%block title%}Fornecedor Cliente - Cadastro{%endblock%}
 
 {% block content %}
 
@@ -8,8 +8,7 @@
             <form method="post" class="form">
                 {%csrf_token%}
                 {{form.as_p}}
-
-                <input value="Criar Fazenda" type="submit"  class="btn btn-primary btn-erp">
+                <input value="Adicionar Fornecedor/Cliente" type="submit"  class="btn btn-primary btn-erp">
             </form>
         </center>
     </div>

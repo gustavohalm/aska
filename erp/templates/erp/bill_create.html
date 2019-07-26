@@ -19,7 +19,7 @@
                           <div class="row">
                               <div class="col-md-3 col-lg-3">
                                   <label for="id_farm">Fazenda:</label><br>
-                                  <select class="form-control forms" id="id_farm">
+                                  <select class="form-control forms" id="id_farm"name="farm">
                                       {%for farm in farms%}
                                         <option value="{{farm.id}}"> {{farm.name}} </option>
                                       {%endfor%}
@@ -34,21 +34,21 @@
 
                               <div class="col-md-3 col-lg-3">
                                   <label for="id_bank_account">Conta Bancária:</label><br>
-                                  <select class="form-control forms" id="id_bank_account">
+                                  <select class="form-control forms" id="id_bank_account" name="bank_account">
                                       {%for bank_account in bank_accounts%}
                                         <option value="{{bank_account.id}}">{{bank_account}} </option>
                                       {%endfor%}
                                   </select>
                                   <br>
                                   <label for="id_account">Categoria:</label><br>
-                                    <select class="form-control forms" id="id_account">
+                                    <select class="form-control forms" id="id_account" name="account">
                                         {%for account in accounts%}
                                             <option value="{{account.id}}" > {{account.name}} </option>
                                         {%endfor%}
                                     </select>
                                   <br>
                                   <label for="id_provider">Fornecedor/Cliente:</label><br>
-                                  <select class="form-control forms" id="id_provider">
+                                  <select class="form-control forms" id="id_provider" name="provider">
                                      {%for provider in providers%}
                                             <option value="{{provider.id}}"> {{provider}} </option>
                                       {%empty%}

@@ -79,7 +79,47 @@ class BillForm(forms.ModelForm):
             'document_number': forms.NumberInput(attrs={'class': 'form-control forms'}),
         }
 
+
 class AccountForm(forms.ModelForm):
     class Meta:
         model = models.Account
         exclude = ['user', 'number']
+        labels = {
+            'name': "Nome",
+        }
+        widgets = {
+            'name': forms.TextInput( attrs= {'class': 'form-control forms'} ),
+        }
+
+
+class BankAccountForm(forms.ModelForm):
+    class Meta:
+        model = models.BankAccount
+
+        exclude = ['user', 'number']
+        labels = {
+            'name': "Banco",
+            'agency': 'Agência',
+            'account_number': 'Conta',
+
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control forms'}),
+            'agency': forms.TextInput(attrs={'class': 'form-control forms'}),
+            'account_number': forms.TextInput(attrs={'class': 'form-control forms'}),
+        }
+
+
+class ProviderForm(forms.ModelForm):
+    class Meta:
+        model = models.Provider
+        exclude = {'user',}
+        labels = {
+            'name': 'Nome do Fornecedor/Cliente',
+            'cnpj': 'CNPJ/CPF',
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control forms'}),
+            'cnpj': forms.TextInput(attrs={'class': 'form-control forms'}),
+        }
+

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, UpdateView
 from . import models, forms
 from django.contrib.auth import authenticate, login
-
+import xml.etree.ElementTree as ET
 
 def loginView(request):
 
@@ -122,7 +122,20 @@ def importExcelBillView(request):
 
 
 def importXmlBillView(request):
-    pass
+    farms = models.Farm.objects.filter(user=request.user)
+    xml = ''
+    cnpj = ''
+    if request.method == 'POST':
+        farm = request.POST['farm']
+        file_xml = request.FILES['file']
+        xml = ET.parse(file_xml)
+        elements = xml.getroot()
+    context = {
+        'farms': farms,
+        'xml': xml,
+        'cnpj': elements.attrib['NFe'].value
+    }
+    return render(request, 'erp/import_xml.html', context)
 
 
 def reportBillsView(request):
@@ -155,7 +168,25 @@ def reportBillsView(request):
         }
     return render(request, 'erp/report_bills.html', context)
 
+
 class AccountCreateView(CreateView):
     model = models.Account
     success_url = '../..'
-    form_class =  forms.AccountForm
+    form_class = forms.AccountForm
+    template_name = 'erp/account_create.html'
+
+
+class BankAccountCreateView(CreateView):
+    model = models.BankAccount
+    success_url = '../..'
+    form_class = forms.BankAccountForm
+    template_name = 'erp/bank_account_create.html'
+
+
+class ProviderCreateView(CreateView):
+    model = models.Provider
+    success_url = '/'
+    form_class =  forms.ProviderForm
+    template_name = 'erp/provider_create.html'
+
+

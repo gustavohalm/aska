@@ -104,8 +104,9 @@
                         Mais
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMore">
-                        <a class="dropdown-item" href="#">Cadastrar Contas Bancárias</a>
-                        <a class="dropdown-item" href="#">Cadastrar Categorias</a>
+                        <a class="dropdown-item" href="{% url 'bank_create'%}">Cadastrar Contas Bancárias</a>
+                        <a class="dropdown-item" href="{% url 'account_create'%}">Cadastrar Categorias</a>
+                        <a class="dropdown-item" href=" {% url 'provider_create'%} ">Cadastrar Fornecedores/Clientes</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Relatórios </a>
                     </div>
