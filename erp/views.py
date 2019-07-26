@@ -92,16 +92,18 @@ def billCreateView(request):
         else:
             total += float(bill.value)
 
-
     form = forms.BillForm
-    form.farm = models.Farm.objects.filter(user=request.user)
-    form.bank_account = models.Farm.objects.filter(user=request.user)
-    form.account = models.Farm.objects.filter(user=request.user)
-    form.provider = models.Farm.objects.filter(user=request.user)
-
+    farms_options = models.Farm.objects.filter(user=request.user)
+    bank_account_options = models.BankAccount.objects.filter(user=request.user)
+    account_options = models.Account.objects.filter(user=request.user)
+    provider_options = models.Provider.objects.filter(user=request.user)
     context = {
         'bills': bills,
         'form': form,
+        'farms': farms_options,
+        'bank_accounts': bank_account_options,
+        'accounts': account_options,
+        'providers': provider_options,
         'value_total': total,
     }
 
@@ -151,5 +153,9 @@ def reportBillsView(request):
         'form': form,
         'bills' : bills
         }
+    return render(request, 'erp/report_bills.html', context)
 
-    return render( request, 'erp/report_bills.html', context)
+class AccountCreateView(CreateView):
+    model = models.Account
+    success_url = '../..'
+    form_class =  forms.AccountForm

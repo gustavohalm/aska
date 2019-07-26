@@ -79,3 +79,7 @@ class BillForm(forms.ModelForm):
             'document_number': forms.NumberInput(attrs={'class': 'form-control forms'}),
         }
 
+class AccountForm(forms.ModelForm):
+    class Meta:
+        model = models.Account
+        exclude = ['user', 'number']
