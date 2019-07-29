@@ -92,9 +92,35 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownBills">
                         <a class="dropdown-item" href="{% url 'bill_create' %}">Realizar Lançamentos</a>
                         <a class="dropdown-item" href="#">Lançamento por fazenda</a>
+                        <a class="dropdown-item" href="{% url 'bill_import_xml' %}">Importar Lançamento(NFe)</a>
+                        <a class="dropdown-item" href="{% url 'bill_import_excel' %}">Importar Lançamento(Planilha)</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{% url 'bills_report' %}">Relatório por Fazenda</a>
                         <a class="dropdown-item" href="#">Relatório por Sócio</a>
+                    </div>
+                </li>
+
+
+               <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProducts" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Estoque
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownProducts">
+                        <a class="dropdown-item" href="#">Adicionar Produto</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Relatório de Estoque</a>
+                    </div>
+                </li>
+
+
+               <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSells" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Venda
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownSells">
+                        <a class="dropdown-item" href="#">Realizar Venda</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Relatório de Vendas</a>
                     </div>
                 </li>
 
@@ -114,9 +140,11 @@
 
 
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <a class="alert alert-danger"  href="#"> SAIR </a>
-            </form>
+                {% if request.user.is_authenticated%}
+                    <a class="alert alert-danger"  href="#"> Sair </a>
+                {%else%}
+                    <a class="alert alert-info"  href="{% url 'login_view'%}"> Entrar</a>
+                {%endif%}
         </div>
     </nav>
 

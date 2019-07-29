@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{%block title%}Lançamentos - Importar Excel {%endblock%}
 
-</body>
-</html>
+{% block content %}
+
+    <div>
+        <center>
+            <h2>Importe dados da sua Planilha Excel</h2>
+            <form  method="post" enctype="multipart/form-data" class="form">
+                {%csrf_token%}
+                {{form.as_p}}
+                 <label for="id_farm">Fazenda: </label><br>
+                    <select id="id_farm" class="form-control forms" name="farm">
+                        {%for farm in farms%}
+                            <option value="{{farm.id}}">{{farm.name}} </option>
+                        {%endfor%}
+                    </select><br>
+                <label for="id_farm">Arquivo: </label>
+                <input type="file" name="file" class="alert alert-info" >
+                <br>
+                <input value="Importar" type="submit"  class="btn btn-info btn-erp">
+            </form>
+        </center>
+    </div>
+    <div>
+        <br>
+        <br>
+        <br>
+        {%if excel %}
+        {{excel}}
+        <br>
+        <br>
+        <br>
+        {{cnpj}}
+        {%endif%}
+    </div>
+{% endblock %}

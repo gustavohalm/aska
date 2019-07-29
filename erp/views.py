@@ -3,6 +3,7 @@ from django.views.generic import CreateView, UpdateView
 from . import models, forms
 from django.contrib.auth import authenticate, login
 import xml.etree.ElementTree as ET
+import  xlrd
 
 def loginView(request):
 
@@ -118,7 +119,23 @@ class BillUpdateView(UpdateView):
 
 
 def importExcelBillView(request):
-    pass
+    farms = models.Farm.objects.filter(user=request.user)
+    import_bills = []
+    if request.methode == 'POST':
+        farm = request.POST['farm']
+        file_excel = request.FILES['file']
+        planilha = xlrd.open_workbook(file_excel)
+        sheet = planilha.get_sheet(0)
+        for row in range(0, sheet.nrows):
+            date = sheet.cell(row, 0).value
+            description = sheet.cell(row, 1).value
+            provider = sheet.cell(row, 2).value
+            
+    context = {
+        'farms': farms,
+        'import_bills': import_bills,
+    }
+    return render(request, 'erp/import_excel.html', context)
 
 
 def importXmlBillView(request):
@@ -133,9 +150,13 @@ def importXmlBillView(request):
     context = {
         'farms': farms,
         'xml': xml,
-        'cnpj': elements.attrib['NFe'].value
+        'cnpj': ''
     }
     return render(request, 'erp/import_xml.html', context)
+
+
+def confirmImport(request):
+    pass
 
 
 def reportBillsView(request):

@@ -82,77 +82,77 @@
                  </form>
               </div>
         <center>
-
-            <table class="table">
-                <tr>
-                    <th>
-                        <h4> Fazenda</h4>
-                    </th>
-
-                    <th>
-                        <h4> Banco</h4>
-                    </th>
-
-                    <th>
-                        <h4> Descrição</h4>
-                    </th>
-
-                    <th>
-                        <h4> Categoria</h4>
-                    </th>
-                    <th>
-                        <h4> Fornecedor/Cliente</h4>
-                    </th>
-
-
-                    <th>
-                        <h4> Valor</h4>
-                    </th>
-
-                    <th>
-                        <h4> Data</h4>
-
-                    </th>
-
-                    <th>
-                        <h4> Ação</h4>
-                    </th>
-                </tr>
-                {%for bill in bills%}
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table">
                     <tr>
-                        <th> <span style="color:#555E5E;">{{bill.farm}} </span></th>
-                        <th> <span style="color:#555E5E;">{{bill.bank_account}} </span></th>
-                        <th> <span style="color:#555E5E;">{{bill.description}} </span></th>
-                        <th> <span style="color:#555E5E;">{{bill.account}} </span></th>
-                        <th> <span style="color:#555E5E;">{{bill.provider}} </span></th>
+                        <th>
+                            <h4> Fazenda</h4>
+                        </th>
 
-                        {%if bill.type == 'Pagar' %}
-                            <th>  <span style="color:#555E5E;">-R${{bill.value}}</span> </th>
-                        {%else%}
-                            <th> <span style="color:#555E5E;">R${{bill.value}}</span> </th>
-                        {%endif%}
+                        <th>
+                            <h4> Banco</h4>
+                        </th>
 
-                        <th> <span style="color:#555E5E;">{{bill.date}}</span> </th>
-                        <th style="color:#555E5E;"> <a href="#">  <span style="color:#df2a2a; "> X </span> </a> | <a href="{% url 'bill_update'  pk=bill.id%}"> <span style="color: #379f8c;"> Editar</span> </a> </th>
+                        <th>
+                            <h4> Descrição</h4>
+                        </th>
+
+                        <th>
+                            <h4> Categoria</h4>
+                        </th>
+                        <th>
+                            <h4> Fornecedor/Cliente</h4>
+                        </th>
+
+
+                        <th>
+                            <h4> Valor</h4>
+                        </th>
+
+                        <th>
+                            <h4> Data</h4>
+
+                        </th>
+
+                        <th>
+                            <h4> Ação</h4>
+                        </th>
                     </tr>
-                {%empty%}
-                <tr>
-                    <center> <th><h5>Sem Lançamentos</h5> </th></center>'
-                </tr>
-                {%endfor%}
-                        <th> Total </th>
-                        <th>  </th>
-                        <th>  </th>
-                        <th>  </th>
-                        <th>  </th>
+                    {%for bill in bills%}
+                        <tr>
+                            <th> <span style="color:#555E5E;">{{bill.farm}} </span></th>
+                            <th> <span style="color:#555E5E;">{{bill.bank_account}} </span></th>
+                            <th> <span style="color:#555E5E;">{{bill.description}} </span></th>
+                            <th> <span style="color:#555E5E;">{{bill.account}} </span></th>
+                            <th> <span style="color:#555E5E;">{{bill.provider}} </span></th>
 
-                        <th> R${{value_total}}  </th>
+                            {%if bill.type == 'Pagar' %}
+                                <th>  <span style="color:#555E5E;">-R${{bill.value}}</span> </th>
+                            {%else%}
+                                <th> <span style="color:#555E5E;">R${{bill.value}}</span> </th>
+                            {%endif%}
 
-                        <th>  </th>
-                        <th>  </th>
+                            <th> <span style="color:#555E5E;">{{bill.date}}</span> </th>
+                            <th style="color:#555E5E;"> <a href="#">  <span style="color:#df2a2a; "> X </span> </a> | <a href="{% url 'bill_update'  pk=bill.id%}"> <span style="color: #379f8c;"> Editar</span> </a> </th>
+                        </tr>
+                    {%empty%}
+                    <tr>
+                        <center> <th><h5>Sem Lançamentos</h5> </th></center>'
+                    </tr>
+                    {%endfor%}
+                            <th> Total </th>
+                            <th>  </th>
+                            <th>  </th>
+                            <th>  </th>
+                            <th>  </th>
 
-            </table>
+                            <th> R${{value_total}}  </th>
 
+                            <th>  </th>
+                            <th>  </th>
+
+                </table>
+            </div>
         </center>
     </div>
 
