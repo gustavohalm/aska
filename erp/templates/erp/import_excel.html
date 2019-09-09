@@ -6,6 +6,7 @@
     <div>
         <center>
             <h2>Importe dados da sua Planilha Excel</h2>
+
             <form  method="post" enctype="multipart/form-data" class="form">
                 {%csrf_token%}
                 {{form.as_p}}
@@ -20,13 +21,33 @@
                 <br>
                 <input value="Importar" type="submit"  class="btn btn-info btn-erp">
             </form>
+
         </center>
     </div>
     <div>
         <br>
         <br>
         <br>
-        {%if excel %}
+        {%if import_bills %}
+            <table class="table">
+                <tr>
+                    <th> Data </th>
+                    <th> Descrição </th>
+                    <th> Categoria </th>
+                    <th> Fornecedor\Cliente </th>
+                    <th> Valor</th>
+                </tr>
+                {%for bill in import_bills%}
+                    <tr>
+                        <th>{{bill.date}}</th>
+                        <th>{{bill.description}}</th>
+                        <th>{{bill.account}}</th>
+                        <th>{{bill.provider}}</th>
+                        <th>{{bill.value}}</th>
+                    </tr>
+                {%endfor%}
+
+            </table>
         {{excel}}
         <br>
         <br>
@@ -34,4 +55,33 @@
         {{cnpj}}
         {%endif%}
     </div>
+    <script>
+        makeReport()
+        {
+            var farm = document.getElementById('id_farm');
+            var month = document.getElementById('id_month');
+            var year = document.getElementById('id_year');
+            if(farm != '')
+            {
+                if(year != '' )
+                {
+                    if( month != '')
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+
+                }
+                else
+                {
+
+                }
+            }
+
+
+        }
+    </script>
 {% endblock %}

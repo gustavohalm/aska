@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, ListView
 from . import models, forms
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 import xml.etree.ElementTree as ET
-import  xlrd
+import xlrd
+
+
+def homeView(request):
+    return render(request, 'erp/index.html')
+
 
 def loginView(request):
 
@@ -17,8 +22,11 @@ def loginView(request):
 
     return render(request, 'erp/login.html')
 
+
 def logoutView(request):
-    pass
+    logout(request.user)
+    return redirect('../')
+
 
 class PartnerCreateView(CreateView):
     model = models.Partner
@@ -33,7 +41,13 @@ class PartnerCreateView(CreateView):
             partner.save()
 
 
-#Creation of Farm's and their Owner's Partnership's
+class PartnerListView(ListView):
+    template_name = 'erp/partner_list.html'
+
+    def get_queryset(self):
+        return models.Partner.objects.filter(user = self.request.user)
+
+
 class FarmCreateView(CreateView):
     model = models.Farm
     form_class = forms.FarmForm
@@ -47,6 +61,12 @@ class FarmCreateView(CreateView):
             farm.save()
             return redirect('partnership_create', pk=farm.id)
 
+
+class FarmListView(ListView):
+    template_name = 'farm_list.html'
+
+    def get_queryset(self):
+        return models.Farm.objects.filter(user= self.request.user)
 
 
 def partnershipCreateView(request, pk):
@@ -121,16 +141,26 @@ class BillUpdateView(UpdateView):
 def importExcelBillView(request):
     farms = models.Farm.objects.filter(user=request.user)
     import_bills = []
-    if request.methode == 'POST':
+    if request.method == 'POST':
         farm = request.POST['farm']
         file_excel = request.FILES['file']
+
         planilha = xlrd.open_workbook(file_excel)
         sheet = planilha.get_sheet(0)
         for row in range(0, sheet.nrows):
             date = sheet.cell(row, 0).value
             description = sheet.cell(row, 1).value
             provider = sheet.cell(row, 2).value
-            
+            account = sheet.cell(row, 3).value
+            value = sheet.cell(row, 4).value
+            bill_dict = {
+               'date': date,
+                'description': description,
+                'provider': provider,
+                'account':account,
+                'value' : value
+            }
+            import_bills.append(bill_dict)
     context = {
         'farms': farms,
         'import_bills': import_bills,
@@ -174,6 +204,7 @@ def reportBillsView(request):
             bills = models.Bill.objects.filter(farm=farm)
     elif 'year' in request.GET:
         year = request.GET['year']
+
         if 'month' in request.GET:
             month = request.GET['month']
             bills = models.Bill.objects.filter(date__year=year).filter(date__month=month)
@@ -206,8 +237,34 @@ class BankAccountCreateView(CreateView):
 
 class ProviderCreateView(CreateView):
     model = models.Provider
-    success_url = '/'
+    success_url = '../..'
     form_class =  forms.ProviderForm
     template_name = 'erp/provider_create.html'
 
+
+class ProductCreateView(CreateView):
+    model = models.Product
+    success_url = '../..'
+    form_class = forms.ProductForm
+    template_name = 'erp/product_create.html'
+    
+    def post(self, request, *args, **kwargs):
+        form = forms.ProductForm(request.POST)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.user = request.user
+            product.save()
+            return redirect('product_list')
+
+
+class ProductListView(ListView):
+    #queryset = models.Product.objects.all()
+    template_name = 'erp/product_list.html'
+
+    def get_queryset(self):
+        return models.Product.objects.filter(user=self.request.user)
+
+
+def sellView(request):
+    pass
 

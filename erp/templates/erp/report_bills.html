@@ -41,7 +41,7 @@
         </div>
     </div>
 </form>
-{% if bills %}
+{% if bills %}<bt>
     <table class="table">
         <tr>
            <th>
@@ -73,13 +73,17 @@
         </tr>
         {% for bill in bills%}
             <tr>
-                <th> {{bill.farm}} </th>
-                <th> {{bill.bank_account}} </th>
-                <th> {{bill.description}} </th>
-                <th> {{bill.account}} </th>
-                <th> {{bill.provider}}</th>
-                <th> {{bill.value}} </th>
-                <th> {{bill.date}} </th>
+                <th> <span style="color:#555E5E;"> {{bill.farm}} </span> </th>
+                <th><span style="color:#555E5E;">  {{bill.bank_account}} </span></th>
+                <th> <span style="color:#555E5E;"> {{bill.description}} </span></th>
+                <th><span style="color:#555E5E;">  {{bill.account}} </span></th>
+                <th> <span style="color:#555E5E;"> {{bill.provider}} </span></th>
+                {%if bill.type == 'Pagar' %}
+                    <th>  <span style="color:#555E5E;">-R${{bill.value}}</span> </th>
+                {%else%}
+                    <th> <span style="color:#555E5E;">R${{bill.value}}</span> </th>
+                {%endif%}
+                <th> <span style="color:#555E5E;"> {{bill.date}} </span></th>
 
             </tr>
         {% endfor %}
