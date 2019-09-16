@@ -47,6 +47,14 @@ class BankAccountSerializer(serializers.ModelSerializer):
 
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
-        mdoel = models.Account
+        model = models.Account
         fields = '__all__'
         read_only_fields = ['id', 'user']
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Product
+        fields = '__all__'
+        read_only_fields = ['id', 'user']
+        

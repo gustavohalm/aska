@@ -55,3 +55,13 @@ class BillsViewset(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
 
+class ProductViewset(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = serializers.ProductSerializer
+
+    def get_queryset(self):
+        return models.Product.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+

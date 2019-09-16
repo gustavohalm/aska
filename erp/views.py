@@ -37,7 +37,7 @@ class PartnerCreateView(CreateView):
         form = forms.PartnerForm(request.POST)
         if form.is_valid():
             partner = form.save(commit=False)
-            partner.user = request.user
+            partner.user = self.request.user
             partner.save()
 
 
@@ -76,6 +76,7 @@ def partnershipCreateView(request, pk):
         form = forms.PartnershipForm(request.POST)
         partnership = form.save(commit=False)
         partnership.farm = farm
+        partnership.user = request.user
         partnership.save()
     if farm.get_partnership():
         partnership = farm.get_partnership()

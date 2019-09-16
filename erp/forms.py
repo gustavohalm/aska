@@ -123,3 +123,20 @@ class ProviderForm(forms.ModelForm):
             'cnpj': forms.TextInput(attrs={'class': 'form-control forms'}),
         }
 
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = models.Product
+        exclude = {'user', }
+        labels = {
+            'name': 'Produto',
+            'unity': 'Unidade de medida',
+            'quantity':'Quantidade',
+            'value': 'Valor por unitário'
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control forms'}),
+            'unity': forms.TextInput(attrs={'class': 'form-control forms'}),
+            'quantity': forms.NumberInput(attrs={'class': 'form-control forms'}),
+            'value': forms.NumberInput(attrs={'class': 'form-control forms'}),
+        }

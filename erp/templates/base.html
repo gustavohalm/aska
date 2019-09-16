@@ -56,7 +56,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="# ">Inicio <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{%url 'home' %} ">Inicio <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -64,10 +64,12 @@
                         Sócios
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownPartner">
+                        <a class="dropdown-item" href="{% url 'partner_list' %}">Sócios </a>
+
                         <a class="dropdown-item" href="{% url 'partner_create' %}">Criar Sócios</a>
                         <a class="dropdown-item" href="#">Adicionar Sócios</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Relatórios </a>
+                        <a class="dropdown-item" href="{% url 'partner_list' %}">Relatórios </a>
                     </div>
                 </li>
 
@@ -78,6 +80,7 @@
                         Fazendas
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownFarm">
+                        <a class="dropdown-item" href="{% url 'farm_list' %}">Fazendas</a>
                         <a class="dropdown-item" href="{% url 'farm_create' %}">Criar Fazenda</a>
                         <a class="dropdown-item" href="#">Editar Fazenda</a>
                         <div class="dropdown-divider"></div>
@@ -106,7 +109,9 @@
                         Estoque
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownProducts">
-                        <a class="dropdown-item" href="#">Adicionar Produto</a>
+                        
+                        <a class="dropdown-item" href="{% url 'product_create' %}">Adicionar Produto</a>
+                        <a class="dropdown-item" href="{% url 'product_list' %}">Produtos</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Relatório de Estoque</a>
                     </div>
